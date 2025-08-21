@@ -613,16 +613,17 @@
                 event.preventDefault();
                 
                 if (isLoading) return;
-
+            
                 const validation = utils.validateForm();
                 if (!validation.valid) {
                     utils.showMessage(validation.message);
                     return;
                 }
-
+            
                 utils.setLoading(true);
-
+            
                 try {
+                    const result = await apiService.generateMusic(validation.data);
                     if (result.music_url) {
                         audioController.loadAudio(result.music_url);
                         utils.showMessage('音乐生成成功！点击播放按钮享受您的专属音乐', 'success');
@@ -670,6 +671,7 @@
     </script>
 </body>
 </html>
+
 
 
 
